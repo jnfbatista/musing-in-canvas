@@ -4,18 +4,26 @@ var x = 0, y = 0;
 
 var circles = new Array();
 
+var gravity = 0.1;
+
+
+// circle definition
 function Circle(x, y, radius) {
 	this.x = x;
 	this.y = y;
 	this.radius = radius;
 
-	this.direction = Math.random() * 2 * Math.PI;
-	this.initSpeed = Math.random() * 10;
-	//this.a = a;
+	this.direction = Math.random() * Math.PI;
+	this.initSpeed = - (Math.random() * 5 + 5);
+
+	// speed
+	this.v = [this.initSpeed * Math.cos(this.direction),
+			this.initSpeed * Math.sin(this.direction) + gravity];
 
 	this.nextPosition = function () {
-		this.x = this.x + 1 * Math.cos(this.direction);
-		this.y = this.y + 1 * Math.sin(this.direction);
+		this.v[1] = this.v[1] + gravity;
+		this.x = this.x + this.v[0];
+		this.y = this.y + this.v[1];
 		return [this.x, this.y];
 	}
 }
@@ -34,6 +42,7 @@ function fireInTheHole(event) {
 
 }
 
+// main draw function
 function draw(timestamp) {
 	currentScreenWidth = document.body.clientWidth;
 	currentScreenHeight = document.body.clientHeight;
@@ -46,26 +55,19 @@ function draw(timestamp) {
 
 	window.requestAnimationFrame(draw);
 }
-
+ 
+// draws the circle
 function drawCircle(circle) {
     nextPosition = circle.nextPosition();
 
 	
-
-	context.restore();
-	if (
-		(nextPosition[0] >= 0 &&  nextPosition[0] <= currentScreenWidth) &&
-		(nextPosition[1] >= 0 &&  nextPosition[1] <= currentScreenHeight)
-		) {
-		context.beginPath();
-		context.arc(nextPosition[0], nextPosition[1], circle.radius, 0, 2 * Math.PI, false);
-		context.fillStyle = 'green';
-		context.fill();
-		context.lineWidth = 5;
-		context.strokeStyle = '#003300';
-		context.stroke();
-		
-	} 
+	context.beginPath();
+	context.arc(nextPosition[0], nextPosition[1], circle.radius, 0, 2 * Math.PI, false);
+	context.fillStyle = 'green';
+	context.fill();
+	context.lineWidth = 5;
+	context.strokeStyle = '#003300';
+	context.stroke();
 	
 
 }
