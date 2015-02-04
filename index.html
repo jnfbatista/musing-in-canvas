@@ -23,6 +23,7 @@
  	<script src="scripts/mainscript.js"></script>
  	<script>
  		document.addEventListener("click", fireInTheHole);
+ 		window.addEventListener("resize", adjustCanvas);
  	</script>	
  </head> 
  <body>
@@ -31,20 +32,8 @@
 
  	<script>
 
-	var canvas = document.getElementById('c');
-	var context = canvas.getContext('2d');
-
-    canvas.width = document.body.clientWidth; //document.width is obsolete
-    canvas.height = document.body.clientHeight;
-
-
-    var requestAnimationFrame = window.requestAnimationFrame ||
-                            window.mozRequestAnimationFrame ||
-                            window.webkitRequestAnimationFrame ||
-                            window.msRequestAnimationFrame;
-
-
-    draw();
+		adjustCanvas();
+	    draw();
  	</script>
 
  </body>
