@@ -15,7 +15,7 @@ function Circle(x, y, radius) {
 	this.y = y;
 	this.radius = radius;
 
-	this.direction = Math.random() * (Math.PI * 0.75)  + Math.PI * 0.25 ;
+	this.direction = Math.random() * 2 * Math.PI;
 	this.initSpeed = - (Math.random() * 5 + 10);
 
 	// speed
@@ -85,10 +85,10 @@ function drawCircle(circle) {
 	
 	context.beginPath();
 	context.arc(nextPosition[0], nextPosition[1], circle.radius, 0, 2 * Math.PI, false);
-	context.fillStyle = 'blue';
+	context.fillStyle = '#333333';
 	context.fill();
 	context.lineWidth = 1;
-	context.strokeStyle = '#6666ff';
+	context.strokeStyle = '#A9A9A9';
 	context.stroke();
 	
 
